@@ -17,9 +17,7 @@ services:
         value: https://lms.divinermedia.com
       - key: CLIENT_URL
         value: https://lms.divinermedia.com
-      - key: EMAIL_USER
-        sync: false
-      - key: EMAIL_PASS
+      - key: RESEND_API_KEY
         sync: false
       - key: EMAIL_FROM
         sync: false
