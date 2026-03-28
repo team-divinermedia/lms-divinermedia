@@ -25,6 +25,15 @@ const app = express();
 // Middleware
 app.use(helmet({
   crossOriginResourcePolicy: false, // allow loading of static uploads (images/videos)
+  contentSecurityPolicy: {
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      // Allow YouTube, Vimeo, and Google Drive video embeds for ReactPlayer
+      'frame-src': ["'self'", 'https://www.youtube.com', 'https://youtube.com', 'https://player.vimeo.com', 'https://drive.google.com'],
+      'script-src': ["'self'", "'unsafe-inline'", 'https://www.youtube.com', 'https://s.ytimg.com'],
+      'img-src': ["'self'", 'data:', 'https:', 'blob:'],
+    },
+  },
 }));
 const allowedOrigins = [
   'https://lms.divinermedia.com',
