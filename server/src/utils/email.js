@@ -1,21 +1,14 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true, // SSL — required on Render (port 587/STARTTLS is blocked)
-  family: 4,    // Force IPv4; Render may not have an IPv6 route (ENETUNREACH)
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const FROM = process.env.EMAIL_FROM || 'Diviner Media LMS <onboarding@resend.dev>';
 
 export async function sendPasswordResetEmail(toEmail, resetToken) {
   const resetUrl = `${process.env.CLIENT_URL || 'http://localhost:5173'}/reset-password/${resetToken}`;
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_FROM,
+  await resend.emails.send({
+    from: FROM,
     to: toEmail,
     subject: 'Reset your Diviner Media LMS password',
     html: `
@@ -38,8 +31,8 @@ export async function sendPasswordResetEmail(toEmail, resetToken) {
 export async function sendInviteEmail(toEmail, inviteToken) {
   const registerUrl = `${process.env.CLIENT_URL || 'http://localhost:5173'}/register/${inviteToken}`;
 
-  await transporter.sendMail({
-    from: process.env.EMAIL_FROM,
+  await resend.emails.send({
+    from: FROM,
     to: toEmail,
     subject: "You're invited to Diviner Media LMS",
     html: `
