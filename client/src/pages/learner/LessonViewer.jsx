@@ -7,6 +7,45 @@ import {
   MessageSquare, ClipboardList, AlertCircle, BookOpen
 } from 'lucide-react';
 
+// Smart video player: YouTube iframe for YT URLs, ReactPlayer for everything else
+function VideoPlayer({ url, onProgress, onPause, playerRef, progressInterval }) {
+  const getYouTubeId = (rawUrl) => {
+    if (!rawUrl) return null;
+    const match = rawUrl.trim().match(
+      /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
+    );
+    return match ? match[1] : null;
+  };
+
+  const ytId = getYouTubeId(url);
+
+  if (ytId) {
+    return (
+      <iframe
+        src={`https://www.youtube-nocookie.com/embed/${ytId}?modestbranding=1&rel=0`}
+        title="Lesson Video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+        style={{ width: '100%', height: '100%', border: 'none' }}
+      />
+    );
+  }
+
+  // Fallback: ReactPlayer for Vimeo, direct video files, etc.
+  return (
+    <ReactPlayer
+      ref={playerRef}
+      url={url}
+      width="100%"
+      height="100%"
+      controls
+      onProgress={onProgress}
+      onPause={onPause}
+      progressInterval={progressInterval}
+    />
+  );
+}
+
 export default function LessonViewer() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -172,19 +211,12 @@ export default function LessonViewer() {
       {/* Video */}
       {lesson.videoUrl && (
         <div className="bg-black rounded-2xl overflow-hidden aspect-video shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-          <ReactPlayer
-            ref={playerRef}
-            url={lesson.videoUrl}
-            width="100%"
-            height="100%"
-            controls
+          <VideoPlayer
+            url={lesson.videoUrl.trim()}
+            playerRef={playerRef}
             onProgress={handleProgress}
             onPause={handlePause}
-            onReady={handleReady}
             progressInterval={5000}
-            config={{
-              youtube: { playerVars: { modestbranding: 1 } },
-            }}
           />
         </div>
       )}

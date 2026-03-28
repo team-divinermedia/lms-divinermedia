@@ -29,7 +29,7 @@ app.use(helmet({
     directives: {
       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
       // Allow YouTube, Vimeo, and Google Drive video embeds for ReactPlayer
-      'frame-src': ["'self'", 'https://www.youtube.com', 'https://youtube.com', 'https://player.vimeo.com', 'https://drive.google.com'],
+      'frame-src': ["'self'", 'https://www.youtube.com', 'https://youtube.com', 'https://www.youtube-nocookie.com', 'https://player.vimeo.com', 'https://drive.google.com'],
       'script-src': ["'self'", "'unsafe-inline'", 'https://www.youtube.com', 'https://s.ytimg.com'],
       'img-src': ["'self'", 'data:', 'https:', 'blob:'],
     },
