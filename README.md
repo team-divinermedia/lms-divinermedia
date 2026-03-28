@@ -333,3 +333,4 @@ The `render.yaml` at the root configures deployment automatically.
 - CORS whitelist: `lms.divinermedia.com` and localhost only
 - Passwords hashed with bcrypt (10 rounds)
 - Invite-only registration (no open sign-up)
+c

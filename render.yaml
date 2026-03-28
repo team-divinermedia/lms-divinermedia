@@ -3,6 +3,7 @@ services:
     name: lms-divinermedia
     runtime: node
     plan: free
+    nodeVersion: 22.11.0
     buildCommand: npm install && npm run build && npx prisma generate
     startCommand: npm start
     envVars:
