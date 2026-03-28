@@ -1,0 +1,207 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  password      String
+  name          String
+  role          String   @default("learner") // admin, learner
+  driveFolderId String?
+  isActive      Boolean  @default(true)
+  accessExpiry  DateTime?
+  lastActiveAt  DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  lessonProgress        LessonProgress[]
+  assessmentSubmissions AssessmentSubmission[]
+  doubts                Doubt[]
+  portfolioProofs       PortfolioProof[]
+}
+
+model Invite {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  role      String   @default("learner")
+  token     String   @unique
+  used      Boolean  @default(false)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model PasswordReset {
+  id        String   @id @default(uuid())
+  email     String
+  token     String   @unique
+  used      Boolean  @default(false)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Course {
+  id          String   @id @default(uuid())
+  title       String
+  description String   @default("")
+  thumbnail   String   @default("")
+  isPublished Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  modules Module[]
+}
+
+model Module {
+  id          String   @id @default(uuid())
+  courseId     String
+  title       String
+  description String   @default("")
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  course      Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons     Lesson[]
+  assessments Assessment[]
+}
+
+model Lesson {
+  id          String    @id @default(uuid())
+  moduleId    String
+  title       String
+  description String    @default("")
+  videoUrl    String    @default("")
+  notes       String    @default("")
+  resources   String    @default("[]")
+  sortOrder   Int       @default(0)
+  unlockDate  DateTime?
+  isPublished Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  module          Module           @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  lessonProgress  LessonProgress[]
+  assessments     Assessment[]
+  doubts          Doubt[]
+  portfolioProofs PortfolioProof[]
+}
+
+model LessonProgress {
+  id             String    @id @default(uuid())
+  userId         String
+  lessonId       String
+  isCompleted    Boolean   @default(false)
+  lastWatchedPos Float     @default(0)
+  completedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+}
+
+model Assessment {
+  id          String   @id @default(uuid())
+  moduleId    String?
+  lessonId    String?
+  title       String
+  description String   @default("")
+  timeLimit   Int?
+  sortOrder   Int      @default(0)
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  module      Module?              @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  lesson      Lesson?              @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions   Question[]
+  submissions AssessmentSubmission[]
+}
+
+model Question {
+  id            String   @id @default(uuid())
+  assessmentId  String
+  type          String   @default("short_answer")
+  content       String
+  options       String   @default("[]")
+  correctAnswer String   @default("")
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  answers    Answer[]
+}
+
+model AssessmentSubmission {
+  id           String    @id @default(uuid())
+  userId       String
+  assessmentId String
+  status       String    @default("submitted")
+  score        Float?
+  feedback     String    @default("")
+  startedAt    DateTime  @default(now())
+  submittedAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assessment Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  answers    Answer[]
+}
+
+model Answer {
+  id           String   @id @default(uuid())
+  submissionId String
+  questionId   String
+  content      String   @default("")
+  type         String   @default("text")
+  createdAt    DateTime @default(now())
+
+  submission AssessmentSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  question   Question             @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+model Doubt {
+  id          String    @id @default(uuid())
+  userId      String
+  lessonId    String?
+  moduleId    String?
+  title       String
+  description String
+  attachment  String    @default("")
+  status      String    @default("open")
+  adminReply  String    @default("")
+  resolvedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson? @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+}
+
+model PortfolioProof {
+  id           String   @id @default(uuid())
+  userId       String
+  lessonId     String?
+  assessmentId String?
+  type         String
+  fileUrl      String
+  title        String   @default("")
+  description  String   @default("")
+  status       String   @default("pending")
+  adminNote    String   @default("")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson? @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+}

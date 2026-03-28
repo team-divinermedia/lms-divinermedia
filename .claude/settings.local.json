@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pandoc /Users/admin/Documents/LMS/LMS_Phase1_Knowledge_Base_Udemy_Style.docx -o /tmp/lms_kb.md)",
+      "Bash(npm -v)",
+      "Bash(npm install:*)",
+      "Bash(npm create:*)",
+      "Bash(npx prisma:*)",
+      "Bash(node -e \"const express = require\\(''express''\\); console.log\\(''Express version:'', require\\(''express/package.json''\\).version\\)\")",
+      "Bash(timeout 5 node server/src/index.js)",
+      "Bash(node -e \":*)",
+      "Bash(node -e \"const { PrismaClient } = require\\(''@prisma/client''\\); console.log\\(typeof PrismaClient\\);\")",
+      "Bash(node --experimental-strip-types -e \":*)",
+      "Bash(npm list:*)",
+      "Bash(ls node_modules/@prisma/adapter*)",
+      "Bash(npx vite:*)",
+      "Bash(node -e \"const m = require\\(''@prisma/adapter-libsql''\\); console.log\\(Object.keys\\(m\\)\\);\")",
+      "Bash(npm run:*)",
+      "Bash(node --experimental-strip-types server/src/utils/seed.js)",
+      "Bash(TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNjM4ZDgxZS00YTlkLTRjZTQtOTM0Ni1kZDFjNDc5MDFjOTYiLCJpYXQiOjE3NzQ2NjIzMTUsImV4cCI6MTc3NTI2NzExNX0.o32KX-RVamw-Jp092sLOqnx1qEd9OLf_gdJTGaC3BDw\" curl -s http://localhost:5000/api/courses -H \"Authorization: Bearer $TOKEN\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(kill %1)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5000/api/courses)",
+      "Bash(kill %1 %2)",
+      "Bash(lsof -ti:5000 -ti:5173)",
+      "Bash(xargs kill:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(find /Users/admin/Documents/LMS -not -path */node_modules/* -type d)",
+      "Bash(grep -r \"maxFileSize\\\\|fileSize\\\\|validation\\\\|sanitize\" /Users/admin/Documents/LMS/server/src --include=*.js)",
+      "Bash(wc -l /Users/admin/Documents/LMS/server/src/routes/*.js /Users/admin/Documents/LMS/client/src/pages/**/*.jsx)",
+      "Bash(grep -r \"email\\\\|nodemailer\\\\|sendgrid\\\\|mail\" /Users/admin/Documents/LMS/server/src --include=*.js)",
+      "Bash(grep -r \"discord\\\\|webhook\" /Users/admin/Documents/LMS --include=*.js --include=*.jsx)",
+      "Bash(grep -r \"google\\\\|drive\\\\|gapi\" /Users/admin/Documents/LMS --include=*.js --include=*.jsx)",
+      "Bash(xargs -I {} basename {})",
+      "Bash(find /Users/admin/Documents/LMS -name *.md -o -name *.txt)",
+      "Bash(kill 4337)",
+      "Bash(node -e \"console.log\\(require\\(''crypto''\\).randomBytes\\(64\\).toString\\(''hex''\\)\\)\")",
+      "Bash(grep -l \"bg-white\\\\|border-gray-200\\\\|text-gray-900\" /Users/admin/Documents/LMS/client/src/pages/learner/*.jsx)"
+    ]
+  }
+}
