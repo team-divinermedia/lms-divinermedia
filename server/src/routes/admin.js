@@ -56,9 +56,15 @@ router.post('/invites', async (req, res) => {
       },
     });
 
-    await sendInviteEmail(email, token);
+    let emailWarning = null;
+    try {
+      await sendInviteEmail(email, token);
+    } catch (emailErr) {
+      console.error('Invite email failed (invite still created):', emailErr.message);
+      emailWarning = 'Invite created but email could not be sent. Check EMAIL_USER / EMAIL_PASS env vars.';
+    }
 
-    res.status(201).json({ invite });
+    res.status(201).json({ invite, warning: emailWarning });
   } catch (error) {
     console.error('Create invite error:', error);
     res.status(500).json({ error: 'Failed to create invite.' });

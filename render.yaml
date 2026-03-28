@@ -15,6 +15,14 @@ services:
         sync: false
       - key: FRONTEND_URL
         value: https://lms.divinermedia.com
+      - key: CLIENT_URL
+        value: https://lms.divinermedia.com
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
       - key: GOOGLE_DRIVE_CLIENT_ID
         sync: false
       - key: GOOGLE_DRIVE_CLIENT_SECRET
