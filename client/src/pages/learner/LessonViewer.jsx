@@ -165,22 +165,22 @@ export default function LessonViewer() {
   if (error && (!lesson || lesson.isErrorContext)) {
     return (
       <div className="flex items-center justify-center py-20 px-4">
-        <div className="text-center glass-panel p-8 rounded-3xl border border-white/10 max-w-md w-full">
+        <div className="text-center bg-card text-card-foreground border rounded-xl shadow-sm p-8 rounded-3xl border border-border max-w-md w-full">
           <BookOpen className="h-14 w-14 text-purple-400 mx-auto mb-4 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
-          <h2 className="text-xl font-bold text-white mb-2">Lesson Locked</h2>
-          <p className="text-gray-400 mb-6 leading-relaxed">{error}</p>
+          <h2 className="text-xl font-bold text-foreground font-semibold mb-2">Lesson Locked</h2>
+          <p className="text-muted-foreground mb-6 leading-relaxed">{error}</p>
           <div className="flex justify-center gap-4">
             {lesson?.courseId ? (
               <Link
                 to={`/courses/${lesson.courseId}`}
-                className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm font-medium rounded-xl transition shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+                className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-sm font-medium rounded-xl transition shadow-[0_0_15px_rgba(168,85,247,0.3)]"
               >
                 Back to Course
               </Link>
             ) : (
               <Link
                 to="/dashboard"
-                className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-sm font-medium rounded-xl transition shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+                className="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-sm font-medium rounded-xl transition shadow-[0_0_15px_rgba(168,85,247,0.3)]"
               >
                 Back to Dashboard
               </Link>
@@ -194,7 +194,7 @@ export default function LessonViewer() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-gray-500">
+      <div className="flex items-center gap-2 text-sm text-muted-foreground">
         {lesson.module?.courseId && (
           <>
             <Link to={`/courses/${lesson.module.courseId}`} className="hover:text-purple-400 transition-colors">
@@ -205,7 +205,7 @@ export default function LessonViewer() {
             <ChevronRight className="h-3 w-3" />
           </>
         )}
-        <span className="text-gray-300 font-medium">{lesson.title}</span>
+        <span className="text-muted-foreground font-medium">{lesson.title}</span>
       </div>
 
       {/* Video */}
@@ -222,19 +222,19 @@ export default function LessonViewer() {
       )}
 
       {/* Lesson Info */}
-      <div className="glass-panel rounded-2xl border border-white/10 p-6">
+      <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-2xl border border-border p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-xl font-bold text-white">{lesson.title}</h1>
+            <h1 className="text-xl font-bold text-foreground font-semibold">{lesson.title}</h1>
             {lesson.description && (
-              <p className="text-gray-400 mt-1 text-sm leading-relaxed">{lesson.description}</p>
+              <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{lesson.description}</p>
             )}
           </div>
           <div className="flex items-center gap-3 shrink-0">
             {lesson.assessments?.length > 0 && (
               <Link
                 to={`/assessments/${lesson.assessments[0].id}`}
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-purple-300 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 rounded-xl transition-colors"
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 rounded-xl transition-colors"
               >
                 <ClipboardList className="h-4 w-4" />
                 Assessment
@@ -242,7 +242,7 @@ export default function LessonViewer() {
             )}
             <Link
               to={`/doubts/new?lessonId=${id}`}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-300 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground bg-muted hover:bg-muted/80 border border-border rounded-xl transition-colors"
             >
               <MessageSquare className="h-4 w-4" />
               Raise Doubt
@@ -253,23 +253,23 @@ export default function LessonViewer() {
 
       {/* Lesson Notes */}
       {lesson.notes && (
-        <div className="glass-panel rounded-2xl border border-white/10 p-6">
-          <h2 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+        <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-2xl border border-border p-6">
+          <h2 className="text-lg font-semibold text-foreground font-semibold mb-3 flex items-center gap-2">
             <FileText className="h-5 w-5 text-purple-400" />
             Lesson Notes
           </h2>
-          <div className="text-gray-400 text-sm leading-relaxed whitespace-pre-wrap">{lesson.notes}</div>
+          <div className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">{lesson.notes}</div>
         </div>
       )}
 
       {/* My Notes */}
-      <div className="glass-panel rounded-2xl border border-white/10 p-6">
+      <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-2xl border border-border p-6">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-white">My Notes</h2>
+          <h2 className="text-lg font-semibold text-foreground font-semibold">My Notes</h2>
           <button
             onClick={handleSaveNotes}
             disabled={savingNotes}
-            className="text-sm font-medium text-purple-400 hover:text-purple-300 disabled:opacity-50 transition-colors"
+            className="text-sm font-medium text-purple-400 hover:text-primary disabled:opacity-50 transition-colors"
           >
             {savingNotes ? 'Saving...' : 'Save Notes'}
           </button>
@@ -278,7 +278,7 @@ export default function LessonViewer() {
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={4}
-          className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm resize-none text-gray-300 placeholder-gray-600 transition-all"
+          className="w-full px-4 py-3 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm resize-none text-muted-foreground placeholder-muted-foreground/50 transition-all"
           placeholder="Write your notes here..."
         />
       </div>
@@ -290,8 +290,8 @@ export default function LessonViewer() {
           try { resources = JSON.parse(resources); } catch { resources = []; }
         }
         return resources && resources.length > 0 ? (
-          <div className="glass-panel rounded-2xl border border-white/10 p-6">
-            <h2 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+          <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-2xl border border-border p-6">
+            <h2 className="text-lg font-semibold text-foreground font-semibold mb-3 flex items-center gap-2">
               <Download className="h-5 w-5 text-cyan-400" />
               Resources
             </h2>
@@ -303,18 +303,18 @@ export default function LessonViewer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   download={resource.title || resource.name || true}
-                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group border border-transparent hover:border-white/10"
+                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors group border border-transparent hover:border-border"
                 >
                   <div className="h-10 w-10 bg-purple-500/20 border border-purple-500/30 rounded-xl flex items-center justify-center shrink-0">
                     <FileText className="h-5 w-5 text-purple-400" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-300 group-hover:text-white truncate transition-colors">
+                    <p className="text-sm font-medium text-muted-foreground group-hover:text-foreground font-semibold truncate transition-colors">
                       {resource.title || resource.name || `Resource ${idx + 1}`}
                     </p>
-                    {resource.type && <p className="text-xs text-gray-500 mt-0.5 uppercase">{resource.type}</p>}
+                    {resource.type && <p className="text-xs text-muted-foreground mt-0.5 uppercase">{resource.type}</p>}
                   </div>
-                  <Download className="h-4 w-4 text-gray-500 group-hover:text-cyan-400 shrink-0 transition-colors" />
+                  <Download className="h-4 w-4 text-muted-foreground group-hover:text-cyan-400 shrink-0 transition-colors" />
                 </a>
               ))}
             </div>
@@ -328,7 +328,7 @@ export default function LessonViewer() {
           {lesson.prevLessonId && (
             <Link
               to={`/lessons/${lesson.prevLessonId}`}
-              className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-gray-300 glass-panel border border-white/10 hover:bg-white/10 rounded-xl transition-colors"
+              className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-muted-foreground bg-card text-card-foreground border rounded-xl shadow-sm border border-border hover:bg-muted/80 rounded-xl transition-colors"
             >
               <ChevronLeft className="h-4 w-4" />
               Previous
@@ -337,7 +337,7 @@ export default function LessonViewer() {
           {lesson.nextLessonId && (
             <Link
               to={`/lessons/${lesson.nextLessonId}`}
-              className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 rounded-xl transition-colors shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+              className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white font-bold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 rounded-xl transition-colors shadow-[0_0_15px_rgba(168,85,247,0.3)]"
             >
               Next Lesson
               <ChevronRight className="h-4 w-4" />
@@ -349,7 +349,7 @@ export default function LessonViewer() {
           <button
             onClick={handleComplete}
             disabled={completing}
-            className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-xl transition-colors disabled:opacity-50 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+            className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-xl transition-colors disabled:opacity-50 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
           >
             <CheckCircle className="h-4 w-4" />
             {completing ? 'Marking...' : 'Mark as Complete'}

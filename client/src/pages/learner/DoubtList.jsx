@@ -4,9 +4,9 @@ import api from '../../api/axios';
 import { MessageSquare, Plus, AlertCircle, ChevronRight } from 'lucide-react';
 
 const statusConfig = {
-  open: { label: 'Open', bg: 'bg-yellow-500/10', text: 'text-yellow-300', border: 'border-yellow-500/30' },
+  open: { label: 'Open', bg: 'bg-yellow-500/10', text: 'text-yellow-600 dark:text-yellow-400', border: 'border-yellow-500/30' },
   in_review: { label: 'In Review', bg: 'bg-blue-500/10', text: 'text-blue-300', border: 'border-blue-500/30' },
-  resolved: { label: 'Resolved', bg: 'bg-emerald-500/10', text: 'text-emerald-300', border: 'border-emerald-500/30' },
+  resolved: { label: 'Resolved', bg: 'bg-emerald-500/10', text: 'text-emerald-600 dark:text-emerald-400', border: 'border-emerald-500/30' },
 };
 
 export default function DoubtList() {
@@ -35,14 +35,14 @@ export default function DoubtList() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-white/10">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-border">
         <div>
-          <h1 className="text-2xl font-extrabold text-white tracking-tight">My Doubts</h1>
-          <p className="text-gray-400 mt-1 font-medium">{doubts.length} doubt{doubts.length !== 1 ? 's' : ''} raised</p>
+          <h1 className="text-2xl font-extrabold text-foreground font-semibold tracking-tight">My Doubts</h1>
+          <p className="text-muted-foreground mt-1 font-medium">{doubts.length} doubt{doubts.length !== 1 ? 's' : ''} raised</p>
         </div>
         <Link
           to="/doubts/new"
-          className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl text-sm font-bold tracking-wide transition-all shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)]"
+          className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold rounded-xl text-sm font-bold tracking-wide transition-all shadow-[0_0_15px_rgba(168,85,247,0.3)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)]"
         >
           <Plus className="h-4 w-4" />
           Raise New Doubt
@@ -57,8 +57,8 @@ export default function DoubtList() {
             onClick={() => setFilter(s)}
             className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors border ${
               filter === s
-                ? 'bg-purple-500/20 text-purple-300 border-purple-500/40'
-                : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10 hover:text-white'
+                ? 'bg-purple-500/20 text-primary border-purple-500/40'
+                : 'bg-muted text-muted-foreground border-border hover:bg-muted/80 hover:text-foreground font-semibold'
             }`}
           >
             {s === 'all' ? 'All' : s === 'in_review' ? 'In Review' : s.charAt(0).toUpperCase() + s.slice(1)}
@@ -74,10 +74,10 @@ export default function DoubtList() {
       )}
 
       {filtered.length === 0 ? (
-        <div className="glass-panel rounded-3xl border border-white/10 p-12 text-center">
-          <MessageSquare className="h-12 w-12 text-gray-600 mx-auto mb-4" />
-          <h3 className="text-lg font-bold text-white mb-1">No doubts found</h3>
-          <p className="text-gray-500 text-sm">
+        <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-3xl border border-border p-12 text-center">
+          <MessageSquare className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+          <h3 className="text-lg font-bold text-foreground font-semibold mb-1">No doubts found</h3>
+          <p className="text-muted-foreground text-sm">
             {filter === 'all' ? 'You have not raised any doubts yet' : `No ${filter.replace('_', ' ')} doubts`}
           </p>
         </div>
@@ -89,51 +89,51 @@ export default function DoubtList() {
             const isSelected = selectedDoubt === dId;
 
             return (
-              <div key={dId} className="glass-panel rounded-2xl border border-white/10 overflow-hidden">
+              <div key={dId} className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-2xl border border-border overflow-hidden">
                 <button
                   onClick={() => setSelectedDoubt(isSelected ? null : dId)}
-                  className="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors text-left"
+                  className="w-full flex items-center justify-between p-5 hover:bg-muted transition-colors text-left"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-1">
-                      <h3 className="font-bold text-white truncate">{doubt.title}</h3>
+                      <h3 className="font-bold text-foreground font-semibold truncate">{doubt.title}</h3>
                       <span className={`px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-lg border shrink-0 ${status.bg} ${status.text} ${status.border}`}>
                         {status.label}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-500 truncate">{doubt.description}</p>
-                    <div className="flex items-center gap-3 mt-2 text-xs text-gray-600 font-medium">
+                    <p className="text-sm text-muted-foreground truncate">{doubt.description}</p>
+                    <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground font-medium">
                       {doubt.lessonTitle && <span>{doubt.lessonTitle}</span>}
                       <span>{new Date(doubt.createdAt).toLocaleDateString()}</span>
                     </div>
                   </div>
-                  <ChevronRight className={`h-5 w-5 text-gray-500 shrink-0 transition-transform ${isSelected ? 'rotate-90' : ''}`} />
+                  <ChevronRight className={`h-5 w-5 text-muted-foreground shrink-0 transition-transform ${isSelected ? 'rotate-90' : ''}`} />
                 </button>
 
                 {isSelected && (
-                  <div className="border-t border-white/5 p-5 bg-black/20">
+                  <div className="border-t border-border p-5 bg-muted/20">
                     <div className="mb-4">
-                      <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Description</p>
-                      <p className="text-sm text-gray-300 leading-relaxed">{doubt.description}</p>
+                      <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">Description</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{doubt.description}</p>
                     </div>
                     {doubt.screenshot && (
                       <div className="mb-4">
-                        <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Screenshot</p>
-                        <img src={doubt.screenshot} alt="Screenshot" className="max-w-sm rounded-xl border border-white/10" />
+                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2">Screenshot</p>
+                        <img src={doubt.screenshot} alt="Screenshot" className="max-w-sm rounded-xl border border-border" />
                       </div>
                     )}
                     {doubt.reply ? (
                       <div className="p-4 bg-purple-500/10 rounded-2xl border border-purple-500/20">
                         <p className="text-xs font-bold text-purple-400 uppercase tracking-widest mb-1">Admin Reply</p>
-                        <p className="text-sm text-gray-300 leading-relaxed">{doubt.reply}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{doubt.reply}</p>
                         {doubt.repliedAt && (
-                          <p className="text-xs text-gray-600 mt-2">
+                          <p className="text-xs text-muted-foreground mt-2">
                             Replied on {new Date(doubt.repliedAt).toLocaleDateString()}
                           </p>
                         )}
                       </div>
                     ) : (
-                      <p className="text-sm text-gray-600 italic">No reply yet</p>
+                      <p className="text-sm text-muted-foreground italic">No reply yet</p>
                     )}
                   </div>
                 )}

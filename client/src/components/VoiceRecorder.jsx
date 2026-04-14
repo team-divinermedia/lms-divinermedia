@@ -68,12 +68,12 @@ export default function VoiceRecorder({ onRecordingComplete, onClear }) {
   };
 
   return (
-    <div className="flex items-center gap-4 bg-black/30 border border-white/10 rounded-xl p-3">
+    <div className="flex items-center gap-4 bg-black/30 border border-border rounded-xl p-3">
       {!isRecording && !audioUrl && (
         <button
           type="button"
           onClick={startRecording}
-          className="flex items-center gap-2 px-4 py-2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30 rounded-xl text-sm font-medium transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-purple-500/20 hover:bg-purple-500/30 text-primary border border-purple-500/30 rounded-xl text-sm font-medium transition-colors"
         >
           <Mic className="h-4 w-4" /> Start Recording
         </button>

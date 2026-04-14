@@ -111,7 +111,7 @@ export default function LessonForm() {
     }
   };
 
-  const inputClass = "w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-gray-300 placeholder-gray-600 transition-all outline-none";
+  const inputClass = "w-full px-4 py-2.5 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-muted-foreground placeholder-muted-foreground/50 transition-all outline-none";
 
   if (loading) {
     return (
@@ -123,18 +123,18 @@ export default function LessonForm() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <div className="flex items-center gap-2 text-sm text-gray-500">
+      <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <button onClick={() => navigate('/admin/courses')} className="hover:text-purple-400 transition-colors font-medium">Courses</button>
         <ChevronRight className="h-3 w-3" />
-        <span className="text-white font-bold">{isEdit ? 'Edit Lesson' : 'Add Lesson'}</span>
+        <span className="text-foreground font-semibold font-bold">{isEdit ? 'Edit Lesson' : 'Add Lesson'}</span>
       </div>
 
-      <div className="glass-panel rounded-3xl border border-white/10 p-6 sm:p-8">
+      <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-3xl border border-border p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-6">
           <div className="h-10 w-10 bg-purple-500/20 border border-purple-500/30 rounded-xl flex items-center justify-center">
             <FileText className="h-5 w-5 text-purple-400" />
           </div>
-          <h1 className="text-xl font-bold text-white">{isEdit ? 'Edit Lesson' : 'Add Lesson'}</h1>
+          <h1 className="text-xl font-bold text-foreground font-semibold">{isEdit ? 'Edit Lesson' : 'Add Lesson'}</h1>
         </div>
 
         {error && (
@@ -146,30 +146,30 @@ export default function LessonForm() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Title</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Title</label>
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required className={inputClass} placeholder="Lesson title" />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Description</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Description</label>
             <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} className={`${inputClass} resize-none`} placeholder="Lesson description" />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Video URL</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Video URL</label>
             <input type="url" value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} className={inputClass} placeholder="https://youtube.com/watch?v=..." />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Notes</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Notes</label>
             <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={6} className={`${inputClass} resize-none`} placeholder="Lesson notes and key takeaways..." />
           </div>
 
           {/* Resources */}
           <div>
             <div className="flex items-center justify-between mb-3">
-              <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Resources</label>
-              <button type="button" onClick={addResource} className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 font-medium transition-colors">
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Resources</label>
+              <button type="button" onClick={addResource} className="flex items-center gap-1 text-sm text-purple-400 hover:text-primary font-medium transition-colors">
                 <Plus className="h-4 w-4" /> Add Resource
               </button>
             </div>
@@ -189,7 +189,7 @@ export default function LessonForm() {
                   className={inputClass}
                   placeholder="URL"
                 />
-                <button type="button" onClick={() => removeResource(idx)} className="p-2 text-gray-500 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-colors">
+                <button type="button" onClick={() => removeResource(idx)} className="p-2 text-muted-foreground hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-colors">
                   <Trash2 className="h-4 w-4" />
                 </button>
               </div>
@@ -198,7 +198,7 @@ export default function LessonForm() {
 
           {/* Unlock Date — datetime with weekday helper */}
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">
               Unlock Date &amp; Time
             </label>
             <div className="flex items-center gap-3">
@@ -213,14 +213,14 @@ export default function LessonForm() {
                 type="button"
                 onClick={suggestNextWeekday}
                 title="Set to next weekday at 10:00 AM"
-                className="flex items-center gap-2 px-3 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-colors shrink-0"
+                className="flex items-center gap-2 px-3 py-2.5 bg-muted hover:bg-muted/80 border border-border rounded-xl text-xs font-medium text-muted-foreground hover:text-foreground font-semibold transition-colors shrink-0"
               >
                 <Calendar className="h-3.5 w-3.5" />
                 Next weekday 10 AM
               </button>
             </div>
-            <p className="text-xs text-gray-600 mt-1.5">
-              Lesson unlocks at this time <span className="text-gray-500 font-medium">and</span> only after the previous lesson's assessment is submitted.
+            <p className="text-xs text-muted-foreground mt-1.5">
+              Lesson unlocks at this time <span className="text-muted-foreground font-medium">and</span> only after the previous lesson's assessment is submitted.
             </p>
           </div>
 
@@ -229,18 +229,18 @@ export default function LessonForm() {
             <button
               type="button"
               onClick={() => setPublished(!published)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${published ? 'bg-purple-600' : 'bg-white/10'}`}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${published ? 'bg-purple-600' : 'bg-muted/80'}`}
             >
               <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${published ? 'translate-x-6' : 'translate-x-1'}`} />
             </button>
-            <span className="text-sm font-medium text-gray-300">Published</span>
+            <span className="text-sm font-medium text-muted-foreground">Published</span>
           </div>
 
           <div className="flex justify-end gap-3 pt-2">
-            <button type="button" onClick={() => navigate('/admin/courses')} className="px-4 py-2.5 text-sm font-medium text-gray-400 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl transition-colors">
+            <button type="button" onClick={() => navigate('/admin/courses')} className="px-4 py-2.5 text-sm font-medium text-muted-foreground bg-muted border border-border hover:bg-muted/80 rounded-xl transition-colors">
               Cancel
             </button>
-            <button type="submit" disabled={submitting} className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl font-medium text-sm transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+            <button type="submit" disabled={submitting} className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold rounded-xl font-medium text-sm transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
               {submitting ? 'Saving...' : isEdit ? 'Update Lesson' : 'Create Lesson'}
             </button>
           </div>

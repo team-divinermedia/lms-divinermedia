@@ -4,11 +4,11 @@ import api from '../../api/axios';
 import { ClipboardList, AlertCircle, ChevronRight, CheckCircle, User, Send, Mic, FileText } from 'lucide-react';
 
 const statusConfig = {
-  submitted: { label: 'Submitted', bg: 'bg-yellow-500/10', text: 'text-yellow-300', border: 'border-yellow-500/30' },
+  submitted: { label: 'Submitted', bg: 'bg-yellow-500/10', text: 'text-yellow-600 dark:text-yellow-400', border: 'border-yellow-500/30' },
   graded:    { label: 'Graded',    bg: 'bg-blue-500/10',   text: 'text-blue-300',   border: 'border-blue-500/30' },
-  pass:      { label: 'Pass',      bg: 'bg-emerald-500/10', text: 'text-emerald-300', border: 'border-emerald-500/30' },
-  needs_improvement: { label: 'Needs Improvement', bg: 'bg-orange-500/10', text: 'text-orange-300', border: 'border-orange-500/30' },
-  reviewed:  { label: 'Reviewed',  bg: 'bg-purple-500/10', text: 'text-purple-300', border: 'border-purple-500/30' },
+  pass:      { label: 'Pass',      bg: 'bg-emerald-500/10', text: 'text-emerald-600 dark:text-emerald-400', border: 'border-emerald-500/30' },
+  needs_improvement: { label: 'Needs Improvement', bg: 'bg-orange-500/10', text: 'text-orange-600 dark:text-orange-400', border: 'border-orange-500/30' },
+  reviewed:  { label: 'Reviewed',  bg: 'bg-purple-500/10', text: 'text-primary', border: 'border-purple-500/30' },
 };
 
 // Parse answer content into { voiceUrl, text }
@@ -84,9 +84,9 @@ export default function AssessmentReview() {
   if (error && !assessment) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="text-center glass-panel p-8 rounded-3xl border border-white/10">
+        <div className="text-center bg-card text-card-foreground border rounded-xl shadow-sm p-8 rounded-3xl border border-border">
           <AlertCircle className="h-12 w-12 text-pink-500 mx-auto mb-4" />
-          <p className="text-gray-400 font-medium">{error}</p>
+          <p className="text-muted-foreground font-medium">{error}</p>
         </div>
       </div>
     );
@@ -95,12 +95,12 @@ export default function AssessmentReview() {
   return (
     <div className="space-y-6 relative z-10">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-gray-500 pb-2 border-b border-white/10">
+      <div className="flex items-center gap-2 text-sm text-muted-foreground pb-2 border-b border-border">
         <button onClick={() => navigate('/admin/courses')} className="hover:text-purple-400 transition-colors font-medium">
           Courses
         </button>
         <ChevronRight className="h-3 w-3" />
-        <span className="text-white font-bold">Review: {assessment?.title}</span>
+        <span className="text-foreground font-semibold font-bold">Review: {assessment?.title}</span>
       </div>
 
       {error && (
@@ -111,10 +111,10 @@ export default function AssessmentReview() {
       )}
 
       {submissions.length === 0 ? (
-        <div className="glass-panel rounded-3xl border border-white/10 p-12 text-center">
-          <ClipboardList className="h-12 w-12 text-gray-600 mx-auto mb-4" />
-          <h3 className="text-lg font-bold text-white mb-1">No submissions yet</h3>
-          <p className="text-gray-500 text-sm">No learners have submitted this assessment</p>
+        <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-3xl border border-border p-12 text-center">
+          <ClipboardList className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+          <h3 className="text-lg font-bold text-foreground font-semibold mb-1">No submissions yet</h3>
+          <p className="text-muted-foreground text-sm">No learners have submitted this assessment</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -124,22 +124,22 @@ export default function AssessmentReview() {
             const isSelected = selectedSubmission === sId;
 
             return (
-              <div key={sId} className="glass-panel rounded-2xl border border-white/10 overflow-hidden">
+              <div key={sId} className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-2xl border border-border overflow-hidden">
                 {/* Submission header */}
                 <button
                   onClick={() => {
                     setSelectedSubmission(isSelected ? null : sId);
                     setFeedback(sub.feedback || '');
                   }}
-                  className="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors text-left"
+                  className="w-full flex items-center justify-between p-5 hover:bg-muted transition-colors text-left"
                 >
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 bg-purple-500/20 border border-purple-500/30 rounded-full flex items-center justify-center shrink-0">
-                      <User className="h-5 w-5 text-purple-300" />
+                      <User className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <p className="font-bold text-white">{sub.user?.name || sub.learnerName || sub.userName || 'Learner'}</p>
-                      <p className="text-xs text-gray-500 mt-0.5">
+                      <p className="font-bold text-foreground font-semibold">{sub.user?.name || sub.learnerName || sub.userName || 'Learner'}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
                         {sub.user?.email && <span className="mr-2">{sub.user.email}</span>}
                         Submitted {new Date(sub.submittedAt || sub.createdAt).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}
                       </p>
@@ -152,7 +152,7 @@ export default function AssessmentReview() {
 
                 {/* Expanded answers + review */}
                 {isSelected && (
-                  <div className="border-t border-white/5 p-5 space-y-5">
+                  <div className="border-t border-border p-5 space-y-5">
                     {/* Answers */}
                     <div className="space-y-4">
                       {sub.answers?.map((answer, idx) => {
@@ -162,9 +162,9 @@ export default function AssessmentReview() {
                         const hasText = !!text;
 
                         return (
-                          <div key={idx} className="p-4 bg-black/30 rounded-2xl border border-white/5 space-y-3">
+                          <div key={idx} className="p-4 bg-muted/50 rounded-2xl border border-border space-y-3">
                             {/* Question */}
-                            <p className="text-sm font-semibold text-gray-300">
+                            <p className="text-sm font-semibold text-muted-foreground">
                               <span className="text-purple-400 mr-2">Q{idx + 1}.</span>
                               {question?.content || answer.question?.content || 'Question'}
                             </p>
@@ -186,14 +186,14 @@ export default function AssessmentReview() {
 
                             {/* Text / additional answer */}
                             {hasText && (
-                              <div className="flex items-start gap-2 p-3 bg-white/5 border border-white/5 rounded-xl">
-                                <FileText className="h-4 w-4 text-gray-500 shrink-0 mt-0.5" />
-                                <p className="text-sm text-gray-400 leading-relaxed">{text}</p>
+                              <div className="flex items-start gap-2 p-3 bg-muted border border-border rounded-xl">
+                                <FileText className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
+                                <p className="text-sm text-muted-foreground leading-relaxed">{text}</p>
                               </div>
                             )}
 
                             {!isVoice && !hasText && (
-                              <p className="text-xs text-gray-600 italic">No answer provided</p>
+                              <p className="text-xs text-muted-foreground italic">No answer provided</p>
                             )}
                           </div>
                         );
@@ -202,14 +202,14 @@ export default function AssessmentReview() {
 
                     {/* Feedback */}
                     <div>
-                      <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">
+                      <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">
                         Feedback for learner
                       </label>
                       <textarea
                         value={feedback}
                         onChange={(e) => setFeedback(e.target.value)}
                         rows={3}
-                        className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm resize-none text-gray-300 placeholder-gray-600 transition-all outline-none"
+                        className="w-full px-4 py-3 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm resize-none text-muted-foreground placeholder-muted-foreground/50 transition-all outline-none"
                         placeholder="Add feedback for the learner..."
                       />
                     </div>
@@ -219,7 +219,7 @@ export default function AssessmentReview() {
                       <button
                         onClick={() => handleReview(sId, 'pass')}
                         disabled={submitting}
-                        className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-bold transition-colors disabled:opacity-50 shadow-[0_0_10px_rgba(16,185,129,0.3)]"
+                        className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm font-bold transition-colors disabled:opacity-50 shadow-[0_0_10px_rgba(16,185,129,0.3)]"
                       >
                         <CheckCircle className="h-4 w-4" />
                         Pass
@@ -227,14 +227,14 @@ export default function AssessmentReview() {
                       <button
                         onClick={() => handleReview(sId, 'needs_improvement')}
                         disabled={submitting}
-                        className="flex items-center gap-2 px-4 py-2.5 bg-orange-500 hover:bg-orange-400 text-white rounded-xl text-sm font-bold transition-colors disabled:opacity-50"
+                        className="flex items-center gap-2 px-4 py-2.5 bg-orange-500 hover:bg-orange-400 text-white font-bold rounded-xl text-sm font-bold transition-colors disabled:opacity-50"
                       >
                         Needs Improvement
                       </button>
                       <button
                         onClick={() => handleReview(sId, 'reviewed')}
                         disabled={submitting}
-                        className="flex items-center gap-2 px-4 py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-sm font-bold transition-colors disabled:opacity-50"
+                        className="flex items-center gap-2 px-4 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl text-sm font-bold transition-colors disabled:opacity-50"
                       >
                         <Send className="h-4 w-4" />
                         Mark Reviewed

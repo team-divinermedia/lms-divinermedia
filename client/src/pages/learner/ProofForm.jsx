@@ -96,7 +96,7 @@ export default function ProofForm() {
   const isUrlType = type === 'link' || type === 'editable_file_link';
   const fileAccept = type === 'image' ? 'image/*' : type === 'video' ? 'video/*' : type === 'pdf' ? '.pdf' : '*';
 
-  const selectClass = "w-full px-3 py-2.5 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-gray-300 transition-all outline-none disabled:opacity-40";
+  const selectClass = "w-full px-3 py-2.5 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-muted-foreground transition-all outline-none disabled:opacity-40";
 
   if (loading) {
     return (
@@ -109,20 +109,20 @@ export default function ProofForm() {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-gray-500">
+      <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <button onClick={() => navigate('/proofs')} className="hover:text-purple-400 transition-colors">Portfolio</button>
         <ChevronRight className="h-3 w-3" />
-        <span className="text-gray-300 font-medium">Upload Proof</span>
+        <span className="text-muted-foreground font-medium">Upload Proof</span>
       </div>
 
-      <div className="glass-panel rounded-3xl border border-white/10 p-6 sm:p-8">
+      <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-3xl border border-border p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-6">
           <div className="h-10 w-10 bg-purple-500/20 border border-purple-500/30 rounded-xl flex items-center justify-center">
             <Award className="h-5 w-5 text-purple-400" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white">Upload Proof of Work</h1>
-            <p className="text-gray-500 text-sm">Share your work to build your portfolio</p>
+            <h1 className="text-xl font-bold text-foreground font-semibold">Upload Proof of Work</h1>
+            <p className="text-muted-foreground text-sm">Share your work to build your portfolio</p>
           </div>
         </div>
 
@@ -136,7 +136,7 @@ export default function ProofForm() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Course</label>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Course</label>
               <select value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)} className={selectClass}>
                 <option value="">Select course</option>
                 {courses.map((c) => (
@@ -145,15 +145,15 @@ export default function ProofForm() {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Attach to</label>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Attach to</label>
               <div className="flex gap-2 mb-2">
                 <button
                   type="button"
                   onClick={() => { setAttachTo('lesson'); setSelectedAttachment(''); }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
                     attachTo === 'lesson'
-                      ? 'bg-purple-500/20 text-purple-300 border-purple-500/40'
-                      : 'bg-white/5 text-gray-500 border-white/10 hover:bg-white/10'
+                      ? 'bg-purple-500/20 text-primary border-purple-500/40'
+                      : 'bg-muted text-muted-foreground border-border hover:bg-muted/80'
                   }`}
                 >
                   Lesson
@@ -163,8 +163,8 @@ export default function ProofForm() {
                   onClick={() => { setAttachTo('assessment'); setSelectedAttachment(''); }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
                     attachTo === 'assessment'
-                      ? 'bg-purple-500/20 text-purple-300 border-purple-500/40'
-                      : 'bg-white/5 text-gray-500 border-white/10 hover:bg-white/10'
+                      ? 'bg-purple-500/20 text-primary border-purple-500/40'
+                      : 'bg-muted text-muted-foreground border-border hover:bg-muted/80'
                   }`}
                 >
                   Assessment
@@ -185,30 +185,30 @@ export default function ProofForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Title</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Title</label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-gray-300 placeholder-gray-600 transition-all outline-none"
+              className="w-full px-4 py-2.5 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-muted-foreground placeholder-muted-foreground/50 transition-all outline-none"
               placeholder="Give your proof a title"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Description</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Description</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm resize-none text-gray-300 placeholder-gray-600 transition-all outline-none"
+              className="w-full px-4 py-3 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm resize-none text-muted-foreground placeholder-muted-foreground/50 transition-all outline-none"
               placeholder="Describe what you created..."
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Type</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-2">Type</label>
             <div className="flex flex-wrap gap-2">
               {proofTypes.map((pt) => (
                 <button
@@ -217,8 +217,8 @@ export default function ProofForm() {
                   onClick={() => setType(pt.value)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-colors border ${
                     type === pt.value
-                      ? 'bg-purple-500/20 text-purple-300 border-purple-500/40'
-                      : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10 hover:text-white'
+                      ? 'bg-purple-500/20 text-primary border-purple-500/40'
+                      : 'bg-muted text-muted-foreground border-border hover:bg-muted/80 hover:text-foreground font-semibold'
                   }`}
                 >
                   <pt.icon className="h-4 w-4" />
@@ -230,22 +230,22 @@ export default function ProofForm() {
 
           {isUrlType ? (
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">URL</label>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">URL</label>
               <input
                 type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 required
-                className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-gray-300 placeholder-gray-600 transition-all outline-none"
+                className="w-full px-4 py-2.5 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-muted-foreground placeholder-muted-foreground/50 transition-all outline-none"
                 placeholder="https://..."
               />
             </div>
           ) : (
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">File</label>
-              <label className="flex items-center gap-3 px-4 py-4 bg-black/40 hover:bg-white/5 border-2 border-dashed border-white/10 hover:border-purple-500/40 rounded-xl cursor-pointer transition-colors">
-                <Upload className="h-5 w-5 text-gray-500" />
-                <span className="text-sm text-gray-500">{file ? file.name : 'Click to upload file'}</span>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">File</label>
+              <label className="flex items-center gap-3 px-4 py-4 bg-muted/50 hover:bg-muted border-2 border-dashed border-border hover:border-purple-500/40 rounded-xl cursor-pointer transition-colors">
+                <Upload className="h-5 w-5 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">{file ? file.name : 'Click to upload file'}</span>
                 <input
                   type="file"
                   accept={fileAccept}
@@ -260,14 +260,14 @@ export default function ProofForm() {
             <button
               type="button"
               onClick={() => navigate('/proofs')}
-              className="px-4 py-2.5 text-sm font-medium text-gray-400 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl transition-colors"
+              className="px-4 py-2.5 text-sm font-medium text-muted-foreground bg-muted border border-border hover:bg-muted/80 rounded-xl transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl font-medium text-sm transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+              className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold rounded-xl font-medium text-sm transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
             >
               {submitting ? 'Uploading...' : 'Upload Proof'}
             </button>

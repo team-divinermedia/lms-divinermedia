@@ -83,7 +83,7 @@ export default function DoubtForm() {
     }
   };
 
-  const selectClass = "w-full px-3 py-2.5 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-gray-300 transition-all outline-none disabled:opacity-40";
+  const selectClass = "w-full px-3 py-2.5 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-muted-foreground transition-all outline-none disabled:opacity-40";
 
   if (loading) {
     return (
@@ -96,20 +96,20 @@ export default function DoubtForm() {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-gray-500">
+      <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <button onClick={() => navigate('/doubts')} className="hover:text-purple-400 transition-colors">Doubts</button>
         <ChevronRight className="h-3 w-3" />
-        <span className="text-gray-300 font-medium">Raise a Doubt</span>
+        <span className="text-muted-foreground font-medium">Raise a Doubt</span>
       </div>
 
-      <div className="glass-panel rounded-3xl border border-white/10 p-6 sm:p-8">
+      <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-3xl border border-border p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-6">
           <div className="h-10 w-10 bg-purple-500/20 border border-purple-500/30 rounded-xl flex items-center justify-center">
             <MessageSquare className="h-5 w-5 text-purple-400" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white">Raise a Doubt</h1>
-            <p className="text-gray-500 text-sm">Describe your question and we will help you out</p>
+            <h1 className="text-xl font-bold text-foreground font-semibold">Raise a Doubt</h1>
+            <p className="text-muted-foreground text-sm">Describe your question and we will help you out</p>
           </div>
         </div>
 
@@ -123,7 +123,7 @@ export default function DoubtForm() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Course</label>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Course</label>
               <select value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)} className={selectClass}>
                 <option value="">Select course</option>
                 {courses.map((c) => (
@@ -132,7 +132,7 @@ export default function DoubtForm() {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Module</label>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Module</label>
               <select
                 value={selectedModule}
                 onChange={(e) => setSelectedModule(e.target.value)}
@@ -146,7 +146,7 @@ export default function DoubtForm() {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Lesson</label>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Lesson</label>
               <select
                 value={selectedLesson}
                 onChange={(e) => setSelectedLesson(e.target.value)}
@@ -162,40 +162,40 @@ export default function DoubtForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Title</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Title</label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-gray-300 placeholder-gray-600 transition-all outline-none"
+              className="w-full px-4 py-2.5 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-muted-foreground placeholder-muted-foreground/50 transition-all outline-none"
               placeholder="Brief summary of your doubt"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Description</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Description</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
               rows={5}
-              className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm resize-none text-gray-300 placeholder-gray-600 transition-all outline-none"
+              className="w-full px-4 py-3 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm resize-none text-muted-foreground placeholder-muted-foreground/50 transition-all outline-none"
               placeholder="Describe your doubt in detail..."
             />
           </div>
 
           <div>
             <div className="flex items-center gap-4 mb-3">
-              <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Attachment (optional)</label>
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Attachment (optional)</label>
               <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={() => { setAttachmentType('screenshot'); setScreenshot(null); }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
                     attachmentType === 'screenshot'
-                      ? 'bg-purple-500/20 text-purple-300 border-purple-500/40'
-                      : 'bg-white/5 text-gray-500 border-white/10 hover:bg-white/10'
+                      ? 'bg-purple-500/20 text-primary border-purple-500/40'
+                      : 'bg-muted text-muted-foreground border-border hover:bg-muted/80'
                   }`}
                 >
                   <Upload className="h-3 w-3 inline mr-1" /> Image
@@ -205,8 +205,8 @@ export default function DoubtForm() {
                   onClick={() => { setAttachmentType('voice'); setScreenshot(null); }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
                     attachmentType === 'voice'
-                      ? 'bg-purple-500/20 text-purple-300 border-purple-500/40'
-                      : 'bg-white/5 text-gray-500 border-white/10 hover:bg-white/10'
+                      ? 'bg-purple-500/20 text-primary border-purple-500/40'
+                      : 'bg-muted text-muted-foreground border-border hover:bg-muted/80'
                   }`}
                 >
                   <Mic className="h-3 w-3 inline mr-1" /> Voice Note
@@ -215,9 +215,9 @@ export default function DoubtForm() {
             </div>
 
             {attachmentType === 'screenshot' ? (
-              <label className="flex items-center gap-3 px-4 py-3 bg-black/40 hover:bg-white/5 border border-dashed border-white/20 hover:border-purple-500/40 rounded-xl cursor-pointer transition-colors w-full sm:w-auto">
-                <Upload className="h-4 w-4 text-gray-500" />
-                <span className="text-sm text-gray-500">{screenshot ? screenshot.name : 'Choose image file'}</span>
+              <label className="flex items-center gap-3 px-4 py-3 bg-muted/50 hover:bg-muted border border-dashed border-border hover:border-purple-500/40 rounded-xl cursor-pointer transition-colors w-full sm:w-auto">
+                <Upload className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">{screenshot ? screenshot.name : 'Choose image file'}</span>
                 <input
                   type="file"
                   accept="image/*"
@@ -237,14 +237,14 @@ export default function DoubtForm() {
             <button
               type="button"
               onClick={() => navigate('/doubts')}
-              className="px-4 py-2.5 text-sm font-medium text-gray-400 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl transition-colors"
+              className="px-4 py-2.5 text-sm font-medium text-muted-foreground bg-muted border border-border hover:bg-muted/80 rounded-xl transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl font-medium text-sm transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+              className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold rounded-xl font-medium text-sm transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
             >
               {submitting ? 'Submitting...' : 'Submit Doubt'}
             </button>

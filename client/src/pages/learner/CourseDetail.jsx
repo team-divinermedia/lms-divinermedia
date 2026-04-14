@@ -49,10 +49,10 @@ export default function CourseDetail() {
   if (error) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="text-center glass-panel p-8 rounded-3xl">
+        <div className="text-center bg-card text-card-foreground border rounded-xl shadow-sm p-8 rounded-3xl">
           <AlertCircle className="h-12 w-12 text-pink-500 mx-auto mb-4 drop-shadow-[0_0_10px_rgba(236,72,153,0.5)]" />
-          <p className="text-gray-300 font-medium mb-4">{error}</p>
-          <Link to="/courses" className="text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors">
+          <p className="text-muted-foreground font-medium mb-4">{error}</p>
+          <Link to="/courses" className="text-purple-400 hover:text-primary text-sm font-medium transition-colors">
             Back to courses
           </Link>
         </div>
@@ -69,25 +69,25 @@ export default function CourseDetail() {
 
   return (
     <div className="space-y-6">
-      <Link to="/courses" className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors font-medium">
+      <Link to="/courses" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground font-semibold transition-colors font-medium">
         <ChevronRight className="h-4 w-4 rotate-180" />
         Back to courses
       </Link>
 
       {/* Course Header */}
-      <div className="glass-panel rounded-3xl border border-white/10 p-6 sm:p-8">
+      <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-3xl border border-border p-6 sm:p-8">
         <div className="flex flex-col sm:flex-row gap-6">
           {course.thumbnail ? (
             <img src={course.thumbnail} alt={course.title} className="w-full sm:w-48 h-32 object-cover rounded-2xl" />
           ) : (
-            <div className="w-full sm:w-48 h-32 bg-gradient-to-br from-purple-900/40 to-cyan-900/20 rounded-2xl flex items-center justify-center shrink-0 border border-white/5">
+            <div className="w-full sm:w-48 h-32 bg-gradient-to-br from-purple-900/40 to-cyan-900/20 rounded-2xl flex items-center justify-center shrink-0 border border-border">
               <BookOpen className="h-10 w-10 text-purple-400/50" />
             </div>
           )}
           <div className="flex-1">
-            <h1 className="text-2xl font-extrabold text-white tracking-tight">{course.title}</h1>
-            <p className="text-gray-400 mt-2 leading-relaxed">{course.description}</p>
-            <div className="flex items-center gap-4 mt-4 text-sm text-gray-500 font-medium">
+            <h1 className="text-2xl font-extrabold text-foreground font-semibold tracking-tight">{course.title}</h1>
+            <p className="text-muted-foreground mt-2 leading-relaxed">{course.description}</p>
+            <div className="flex items-center gap-4 mt-4 text-sm text-muted-foreground font-medium">
               <span>{modules.length} module{modules.length !== 1 ? 's' : ''}</span>
               <span className="w-1 h-1 rounded-full bg-white/20"></span>
               <span>{totalLessons} lesson{totalLessons !== 1 ? 's' : ''}</span>
@@ -97,10 +97,10 @@ export default function CourseDetail() {
 
         <div className="mt-6">
           <div className="flex justify-between text-sm mb-2 font-medium">
-            <span className="text-gray-400">{completedLessons} of {totalLessons} lessons completed</span>
+            <span className="text-muted-foreground">{completedLessons} of {totalLessons} lessons completed</span>
             <span className="text-cyan-400 font-bold">{Math.round(progress)}%</span>
           </div>
-          <div className="w-full bg-black/40 rounded-full h-2.5 overflow-hidden border border-white/5 shadow-inner">
+          <div className="w-full bg-muted/50 rounded-full h-2.5 overflow-hidden border border-border shadow-inner">
             <div
               className="bg-gradient-to-r from-purple-500 to-cyan-400 rounded-full h-2.5 transition-all duration-1000 shadow-[0_0_10px_rgba(56,189,248,0.4)]"
               style={{ width: `${progress}%` }}
@@ -112,10 +112,10 @@ export default function CourseDetail() {
       {/* Modules */}
       <div className="space-y-3">
         {modules.length === 0 ? (
-          <div className="glass-panel rounded-3xl border border-white/10 p-12 text-center">
-            <FileText className="h-12 w-12 text-gray-600 mx-auto mb-4" />
-            <h3 className="text-lg font-bold text-white mb-1">No modules yet</h3>
-            <p className="text-gray-500 text-sm">This course has no content yet</p>
+          <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-3xl border border-border p-12 text-center">
+            <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-lg font-bold text-foreground font-semibold mb-1">No modules yet</h3>
+            <p className="text-muted-foreground text-sm">This course has no content yet</p>
           </div>
         ) : (
           modules.map((module) => {
@@ -125,10 +125,10 @@ export default function CourseDetail() {
             const modCompleted = lessons.filter((l) => isLessonCompleted(l)).length;
 
             return (
-              <div key={mId} className="glass-panel rounded-2xl border border-white/10 overflow-hidden">
+              <div key={mId} className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-2xl border border-border overflow-hidden">
                 <button
                   onClick={() => toggleModule(mId)}
-                  className="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors text-left"
+                  className="w-full flex items-center justify-between p-5 hover:bg-muted transition-colors text-left"
                 >
                   <div className="flex items-center gap-3">
                     <div className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 ${
@@ -143,17 +143,17 @@ export default function CourseDetail() {
                       )}
                     </div>
                     <div>
-                      <h3 className="font-bold text-white">{module.title}</h3>
-                      <p className="text-xs text-gray-500 mt-0.5 font-medium">
+                      <h3 className="font-bold text-foreground font-semibold">{module.title}</h3>
+                      <p className="text-xs text-muted-foreground mt-0.5 font-medium">
                         {modCompleted}/{lessons.length} lessons completed
                       </p>
                     </div>
                   </div>
-                  <ChevronDown className={`h-5 w-5 text-gray-500 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                 </button>
 
                 {isExpanded && lessons.length > 0 && (
-                  <div className="border-t border-white/5">
+                  <div className="border-t border-border">
                     {lessons.map((lesson, idx) => {
                       const lId = lesson._id || lesson.id;
                       const isLocked = lesson.locked;
@@ -162,11 +162,11 @@ export default function CourseDetail() {
                         <div key={lId || idx}>
                           {isLocked ? (
                             <div className="flex items-center gap-4 px-5 py-3.5 opacity-40">
-                              <Lock className="h-4 w-4 text-gray-500 shrink-0" />
+                              <Lock className="h-4 w-4 text-muted-foreground shrink-0" />
                               <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-400 truncate">{lesson.title}</p>
+                                <p className="text-sm font-medium text-muted-foreground truncate">{lesson.title}</p>
                                 {lesson.unlockDate && (
-                                  <p className="text-xs text-gray-600 mt-0.5">
+                                  <p className="text-xs text-muted-foreground mt-0.5">
                                     Unlocks {new Date(lesson.unlockDate).toLocaleDateString()}
                                   </p>
                                 )}
@@ -175,23 +175,23 @@ export default function CourseDetail() {
                           ) : (
                             <Link
                               to={`/lessons/${lId}`}
-                              className="flex items-center gap-4 px-5 py-3.5 hover:bg-white/5 transition-colors group"
+                              className="flex items-center gap-4 px-5 py-3.5 hover:bg-muted transition-colors group"
                             >
                               {isLessonCompleted(lesson) ? (
                                 <CheckCircle className="h-4 w-4 text-emerald-400 shrink-0" />
                               ) : (
-                                <PlayCircle className="h-4 w-4 text-purple-400 shrink-0 group-hover:text-purple-300" />
+                                <PlayCircle className="h-4 w-4 text-purple-400 shrink-0 group-hover:text-primary" />
                               )}
                               <div className="flex-1 min-w-0">
                                 <p className={`text-sm font-medium truncate transition-colors ${
                                   isLessonCompleted(lesson)
-                                    ? 'text-gray-500'
-                                    : 'text-gray-200 group-hover:text-white'
+                                    ? 'text-muted-foreground'
+                                    : 'text-foreground group-hover:text-foreground font-semibold'
                                 }`}>
                                   {lesson.title}
                                 </p>
                               </div>
-                              <ChevronRight className="h-4 w-4 text-gray-600 group-hover:text-gray-400 shrink-0 transition-colors" />
+                              <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-muted-foreground shrink-0 transition-colors" />
                             </Link>
                           )}
                         </div>

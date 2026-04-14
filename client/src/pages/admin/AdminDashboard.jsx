@@ -41,9 +41,9 @@ export default function AdminDashboard() {
   if (error) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="text-center glass-panel p-8 rounded-3xl border border-red-500/20 shadow-[0_0_30px_rgba(239,68,68,0.2)]">
+        <div className="text-center bg-card text-card-foreground border rounded-xl shadow-sm p-8 rounded-3xl border border-red-500/20 shadow-[0_0_30px_rgba(239,68,68,0.2)]">
           <AlertCircle className="h-14 w-14 text-pink-500 mx-auto mb-4 drop-shadow-[0_0_15px_rgba(236,72,153,0.5)]" />
-          <p className="text-red-200 font-bold tracking-wide">{error}</p>
+          <p className="text-destructive font-bold tracking-wide">{error}</p>
         </div>
       </div>
     );
@@ -58,26 +58,26 @@ export default function AdminDashboard() {
   ];
 
   const quickActions = [
-    { label: 'Create Curriculum', icon: Plus, to: '/admin/courses/new', bg: 'bg-purple-600/20 hover:bg-purple-600/40 border-purple-500/30 text-purple-300 shadow-purple-500/20' },
-    { label: 'Recruit Interns', icon: Mail, to: '/admin/invites', bg: 'bg-cyan-600/20 hover:bg-cyan-600/40 border-cyan-500/30 text-cyan-300 shadow-cyan-500/20' },
-    { label: 'Performance Metrics', icon: TrendingUp, to: '/admin/reports', bg: 'bg-pink-600/20 hover:bg-pink-600/40 border-pink-500/30 text-pink-300 shadow-pink-500/20' },
+    { label: 'Create Curriculum', icon: Plus, to: '/admin/courses/new', bg: 'bg-purple-600/20 hover:bg-purple-600/40 border-purple-500/30 text-purple-600 dark:text-purple-400 shadow-purple-500/20' },
+    { label: 'Recruit Interns', icon: Mail, to: '/admin/invites', bg: 'bg-cyan-600/20 hover:bg-cyan-600/40 border-cyan-500/30 text-cyan-600 dark:text-cyan-400 shadow-cyan-500/20' },
+    { label: 'Performance Metrics', icon: TrendingUp, to: '/admin/reports', bg: 'bg-pink-600/20 hover:bg-pink-600/40 border-pink-500/30 text-pink-600 dark:text-pink-400 shadow-pink-500/20' },
   ];
 
   return (
     <div className="space-y-10 relative">
       <div className="absolute -top-20 -right-20 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-white/10">
+      <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2 border-b border-border">
         <div>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-pink-300 mb-4 backdrop-blur-md uppercase tracking-[0.15em] shadow-inner">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted border border-border text-xs font-bold text-cyan-600 dark:text-cyan-400 mb-4 backdrop-blur-md uppercase tracking-[0.15em] shadow-inner">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>
             </span>
             Director Interface Access Granted
           </div>
-          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 tracking-tight">Diviner Command Center</h1>
-          <p className="text-purple-300/70 mt-2 font-semibold">Global overview of training progress and content pipelines</p>
+          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-foreground to-muted-foreground tracking-tight">Diviner Command Center</h1>
+          <p className="text-muted-foreground mt-2 font-semibold">Global overview of training progress and content pipelines</p>
         </div>
       </div>
 
@@ -86,20 +86,20 @@ export default function AdminDashboard() {
           <Link
             key={card.label}
             to={card.to}
-            className="glass-panel rounded-3xl p-6 relative overflow-hidden group hover:-translate-y-1 hover:border-white/30 transition-all duration-300 flex flex-col items-start"
+            className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-3xl p-6 relative overflow-hidden group hover:-translate-y-1 hover:border-white/30 transition-all duration-300 flex flex-col items-start"
           >
             <div className={`absolute inset-0 bg-gradient-to-br ${card.grad} opacity-[0.05] group-hover:opacity-10 transition-opacity duration-300`}></div>
-            <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${card.grad} shadow-lg ${card.shadow} flex items-center justify-center mb-5 border border-white/20 group-hover:scale-110 transition-transform duration-300`}>
-              <card.icon className="h-6 w-6 text-white" />
+            <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${card.grad} shadow-lg ${card.shadow} flex items-center justify-center mb-5 border border-border group-hover:scale-110 transition-transform duration-300`}>
+              <card.icon className="h-6 w-6 text-white font-semibold" />
             </div>
-            <p className="text-4xl font-black text-white drop-shadow-md mb-1">{card.value}</p>
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{card.label}</p>
+            <p className="text-4xl font-black text-foreground font-semibold drop-shadow-md mb-1">{card.value}</p>
+            <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{card.label}</p>
           </Link>
         ))}
       </div>
 
       <div className="relative z-10">
-        <h2 className="text-xl font-bold text-white mb-6 tracking-wide drop-shadow-md flex items-center gap-3">
+        <h2 className="text-xl font-bold text-foreground font-semibold mb-6 tracking-wide drop-shadow-md flex items-center gap-3">
           <Activity className="h-6 w-6 text-purple-400" />
           Rapid Deployment
         </h2>
@@ -119,27 +119,27 @@ export default function AdminDashboard() {
 
       {recentActivity.length > 0 && (
         <div className="pt-4 relative z-10">
-          <h2 className="text-xl font-bold text-white mb-6 tracking-wide drop-shadow-md flex items-center gap-3">
+          <h2 className="text-xl font-bold text-foreground font-semibold mb-6 tracking-wide drop-shadow-md flex items-center gap-3">
             <svg className="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
             Global Intern Activity Stream
           </h2>
-          <div className="glass-panel rounded-3xl border border-white/10 divide-y divide-white/5 shadow-2xl">
+          <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-3xl border border-border divide-y divide-white/5 shadow-2xl">
             {recentActivity.slice(0, 10).map((activity, idx) => (
-              <div key={idx} className="px-6 py-5 flex items-center gap-5 hover:bg-white/5 transition-colors first:rounded-t-3xl last:rounded-b-3xl">
-                <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-white/10 to-transparent border border-white/10 flex items-center justify-center shrink-0 shadow-inner">
-                  <Users className="h-6 w-6 text-purple-300 opacity-80" />
+              <div key={idx} className="px-6 py-5 flex items-center gap-5 hover:bg-muted transition-colors first:rounded-t-3xl last:rounded-b-3xl">
+                <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-white/10 to-transparent border border-border flex items-center justify-center shrink-0 shadow-inner">
+                  <Users className="h-6 w-6 text-primary opacity-80" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-base font-semibold text-gray-200 truncate">{activity.description || activity.title}</p>
+                  <p className="text-base font-semibold text-foreground truncate">{activity.description || activity.title}</p>
                   <div className="flex items-center gap-2 mt-1.5">
                     {activity.userName && (
-                      <span className="px-2 py-0.5 rounded-md bg-purple-500/20 text-purple-300 text-[10px] uppercase font-bold tracking-wider border border-purple-500/20">
+                      <span className="px-2 py-0.5 rounded-md bg-purple-500/20 text-primary text-[10px] uppercase font-bold tracking-wider border border-purple-500/20">
                         {activity.userName}
                       </span>
                     )}
-                    <span className="text-xs text-gray-500 font-medium tracking-wide">
+                    <span className="text-xs text-muted-foreground font-medium tracking-wide">
                       {new Date(activity.createdAt || activity.date).toLocaleDateString()}
                     </span>
                   </div>

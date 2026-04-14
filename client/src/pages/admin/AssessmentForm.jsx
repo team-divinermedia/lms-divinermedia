@@ -137,7 +137,7 @@ export default function AssessmentForm() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <div className="flex items-center gap-2 text-sm text-gray-500">
+      <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <button onClick={() => navigate('/admin/courses')} className="hover:text-purple-600">Courses</button>
         <ChevronRight className="h-3 w-3" />
         <span className="text-gray-900 font-medium">{isEdit ? 'Edit Assessment' : 'New Assessment'}</span>
@@ -222,7 +222,7 @@ export default function AssessmentForm() {
               className="w-32 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-sm"
               placeholder="0"
             />
-            <p className="text-xs text-gray-400 mt-1">Leave empty for no time limit</p>
+            <p className="text-xs text-muted-foreground mt-1">Leave empty for no time limit</p>
           </div>
 
           <div>
@@ -240,7 +240,7 @@ export default function AssessmentForm() {
 
             {questions.length === 0 && (
               <div className="text-center py-8 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-400">No questions yet. Click "Add Question" to start.</p>
+                <p className="text-sm text-muted-foreground">No questions yet. Click "Add Question" to start.</p>
               </div>
             )}
 
@@ -251,7 +251,7 @@ export default function AssessmentForm() {
                   <button
                     type="button"
                     onClick={() => removeQuestion(idx)}
-                    className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                    className="p-1 text-muted-foreground hover:text-red-600 transition-colors"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -278,7 +278,7 @@ export default function AssessmentForm() {
 
                   {q.type === 'mcq' && (
                     <div className="space-y-2">
-                      <p className="text-xs font-medium text-gray-500">Options</p>
+                      <p className="text-xs font-medium text-muted-foreground">Options</p>
                       {(q.options || []).map((opt, oIdx) => (
                         <div key={oIdx} className="flex gap-2">
                           <input
@@ -291,7 +291,7 @@ export default function AssessmentForm() {
                           <button
                             type="button"
                             onClick={() => removeOption(idx, oIdx)}
-                            className="p-2 text-gray-400 hover:text-red-600 transition-colors"
+                            className="p-2 text-muted-foreground hover:text-red-600 transition-colors"
                           >
                             <Trash2 className="h-3 w-3" />
                           </button>
@@ -322,7 +322,7 @@ export default function AssessmentForm() {
             <button
               type="submit"
               disabled={submitting}
-              className="px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium text-sm transition-colors disabled:opacity-50"
+              className="px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg font-medium text-sm transition-colors disabled:opacity-50"
             >
               {submitting ? 'Saving...' : isEdit ? 'Update Assessment' : 'Create Assessment'}
             </button>

@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key_to_prevent_crash');
 
 const FROM = process.env.EMAIL_FROM || 'Diviner Media LMS <onboarding@resend.dev>';
 

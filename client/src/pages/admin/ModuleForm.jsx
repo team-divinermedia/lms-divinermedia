@@ -39,28 +39,28 @@ export default function ModuleForm() {
     }
   };
 
-  const inputClass = "w-full px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-gray-300 placeholder-gray-600 transition-all outline-none";
+  const inputClass = "w-full px-4 py-2.5 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-muted-foreground placeholder-muted-foreground/50 transition-all outline-none";
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <div className="flex items-center gap-2 text-sm text-gray-500">
+      <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <button onClick={() => navigate('/admin/courses')} className="hover:text-purple-400 transition-colors font-medium">Courses</button>
         <ChevronRight className="h-3 w-3" />
         {courseName && (
           <>
-            <span className="text-gray-400">{courseName}</span>
+            <span className="text-muted-foreground">{courseName}</span>
             <ChevronRight className="h-3 w-3" />
           </>
         )}
-        <span className="text-white font-bold">Add Module</span>
+        <span className="text-foreground font-semibold font-bold">Add Module</span>
       </div>
 
-      <div className="glass-panel rounded-3xl border border-white/10 p-6 sm:p-8">
+      <div className="bg-card text-card-foreground border rounded-xl shadow-sm rounded-3xl border border-border p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-6">
           <div className="h-10 w-10 bg-purple-500/20 border border-purple-500/30 rounded-xl flex items-center justify-center">
             <Layers className="h-5 w-5 text-purple-400" />
           </div>
-          <h1 className="text-xl font-bold text-white">Add Module</h1>
+          <h1 className="text-xl font-bold text-foreground font-semibold">Add Module</h1>
         </div>
 
         {error && (
@@ -72,7 +72,7 @@ export default function ModuleForm() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Title</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Title</label>
             <input
               type="text"
               value={title}
@@ -84,7 +84,7 @@ export default function ModuleForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Description</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Description</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -95,13 +95,13 @@ export default function ModuleForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Sort Order</label>
+            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Sort Order</label>
             <input
               type="number"
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
               min="0"
-              className="w-32 px-4 py-2.5 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-gray-300 transition-all outline-none"
+              className="w-32 px-4 py-2.5 bg-muted/50 border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 text-sm text-muted-foreground transition-all outline-none"
             />
           </div>
 
@@ -109,14 +109,14 @@ export default function ModuleForm() {
             <button
               type="button"
               onClick={() => navigate('/admin/courses')}
-              className="px-4 py-2.5 text-sm font-medium text-gray-400 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl transition-colors"
+              className="px-4 py-2.5 text-sm font-medium text-muted-foreground bg-muted border border-border hover:bg-muted/80 rounded-xl transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl font-medium text-sm transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+              className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold rounded-xl font-medium text-sm transition-all disabled:opacity-50 shadow-[0_0_15px_rgba(168,85,247,0.3)]"
             >
               {submitting ? 'Creating...' : 'Create Module'}
             </button>
