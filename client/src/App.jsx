@@ -77,15 +77,18 @@ function AppRoutes() {
 }
 
 import { ThemeProvider } from './contexts/ThemeContext';
+import ServerWakeup from './components/ServerWakeup';
 
 export default function App() {
   return (
-    <ThemeProvider defaultTheme="dark">
-      <BrowserRouter>
-        <AuthProvider>
-          <AppRoutes />
-        </AuthProvider>
-      </BrowserRouter>
-    </ThemeProvider>
+    <ServerWakeup>
+      <ThemeProvider defaultTheme="dark">
+        <BrowserRouter>
+          <AuthProvider>
+            <AppRoutes />
+          </AuthProvider>
+        </BrowserRouter>
+      </ThemeProvider>
+    </ServerWakeup>
   );
 }
